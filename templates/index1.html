@@ -17,13 +17,20 @@
 
      <!-- Main Input For Receiving Query to our ML -->
     <form action="{{ url_for('predict')}}"method="post">
-        <h3>Available models: Honda Civic, Honda Accord, Toyota Corolla, Toyota Camry</h3><br><select name="Model_Camry" id="model" required="required">
+        <h3>Available models: Honda Civic, Honda Accord, Toyota Corolla, Toyota Camry</h3><br>
+            <select name="Model_Camry" id="model" required="required">
                 <option value="Camry">Camry</option>
                 <option value="Civic">Civic</option>
                 <option value="Corolla">Corolla</option>
                 <option value="Accord">Accord</option>
             </select>
-        <input type="text" name="Year" placeholder="Year" required="required" />
+            <select name="Year" id="Year" required="required">
+                <script language="javascript" type="text/javascript">
+                    for(var year = 2000; year <= 2022; year++){
+                        document.write("<option>"+year+"</option>");
+                    }
+                </script>
+            </select>
         <input type="text" name="Mileage" placeholder="Mileage" required="required" />
 
         <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>

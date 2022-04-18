@@ -21,33 +21,35 @@ def Home():
 standard_to = StandardScaler()
 @app.route("/predict", methods = ['Post'])
 def predict():
-    Model_Camry=0
-    Model_Civic=0
-    Model_Corolla=0
     if request.method =='POST':
-        Year = int(request.form['Year'])
-        Mileage = int(request.form['Mileage'])
-        model = request.form['Model_Camry']
-        if(model =='Camry'):
+        try:
+            int(request.form['Mileage'])
+        except:
+            return render_template('index1.html', prediction_text="Please enter a valid number for mileage")
+        else:
+            Year = int(request.form['Year'])
+            age = 2022 - Year
+            Mileage = int(request.form['Mileage'])
+            modelCar = request.form['Model_Camry']
+        if(modelCar =='Camry'):
             Model_Camry=1
             Model_Civic=0
             Model_Corolla=0
-        elif(model == 'Civic'):
+        elif(modelCar == 'Civic'):
             Model_Camry=0
             Model_Civic=1
             Model_Corolla=0
-        elif(model == 'Corolla'):
+        elif(modelCar == 'Corolla'):
             Model_Camry=0
             Model_Civic=0
             Model_Corolla=1
-        elif(Model_Camry == 'Accord'):
+        elif(modelCar == 'Accord'):
             Model_Camry=0
             Model_Civic=0
             Model_Corolla=0
         else:
             return render_template('index1.html',prediction_text="Please enter a valid model")
-        Year = 2022-Year
-        prediction = model.predict([[Mileage,Year,Model_Camry,Model_Civic,Model_Corolla]])
+        prediction = model.predict([[Mileage,age,Model_Camry,Model_Civic,Model_Corolla]])
         output = round(prediction[0],0)
         return render_template('index1.html', prediction_text="The approximate value of this car is {}.".format(output))
 

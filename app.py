@@ -27,16 +27,16 @@ def predict():
     if request.method =='POST':
         Year = int(request.form['Year'])
         Mileage = int(request.form['Mileage'])
-        Model_Camry = request.form['Model_Camry']
-        if(Model_Camry =='Camry'):
+        model = request.form['Model_Camry']
+        if(model =='Camry'):
             Model_Camry=1
             Model_Civic=0
             Model_Corolla=0
-        elif(Model_Camry == 'Civic'):
+        elif(model == 'Civic'):
             Model_Camry=0
             Model_Civic=1
             Model_Corolla=0
-        elif(Model_Camry == 'Corolla'):
+        elif(model == 'Corolla'):
             Model_Camry=0
             Model_Civic=0
             Model_Corolla=1
